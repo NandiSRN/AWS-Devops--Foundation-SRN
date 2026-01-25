@@ -140,6 +140,8 @@ Stateless only.
 
 ---
 
+
+
 ## 📄 `05-kubernetes/03-workloads/statefulset.md`
 
 ```md
