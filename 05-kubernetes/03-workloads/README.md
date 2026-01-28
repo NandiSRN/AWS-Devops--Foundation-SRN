@@ -127,3 +127,208 @@ spec:
 
 Production Insight
 
+
+Deployments are ideal for:
+
+APIs
+
+Web apps
+
+Microservices
+
+Stateless only.
+
+
+---
+
+
+
+## 📄 `05-kubernetes/03-workloads/statefulset.md`
+
+```md
+# StatefulSet – Managing Stateful Applications
+
+## The Problem StatefulSet Solves
+
+Some apps need:
+- Stable network identity
+- Stable storage
+- Ordered startup
+
+Deployments cannot guarantee this.
+
+---
+
+## What StatefulSet Provides
+
+- Fixed pod names (pod-0, pod-1)
+- Stable DNS
+- Persistent volumes per pod
+- Ordered scaling
+
+---
+
+## Common Use Cases
+
+- Databases
+- Kafka
+- Zookeeper
+- Elasticsearch
+
+---
+
+## Production Rule
+
+Never run databases using Deployments.
+Use StatefulSets.
+
+📄 05-kubernetes/03-workloads/daemonset.md
+# DaemonSet – One Pod Per Node
+
+## What DaemonSet Does
+
+DaemonSet ensures:
+> One pod runs on every node.
+
+---
+
+## Why This Is Needed
+
+Some workloads are node-specific:
+- Log collectors
+- Monitoring agents
+- Network plugins
+
+---
+
+## Examples
+
+- Fluent Bit
+- Node Exporter
+- CNI agents
+
+---
+
+## Production Insight
+
+DaemonSets scale automatically as nodes are added.
+
+📄 05-kubernetes/03-workloads/job.md
+# Job – Run Once Tasks
+
+## What a Job Is
+
+A Job:
+> Runs a task until completion.
+
+---
+
+## Use Cases
+
+- Database migrations
+- Batch processing
+- One-time scripts
+
+---
+
+## Behavior
+
+- Retries on failure
+- Stops after success
+
+---
+
+## Production Rule
+
+Jobs should be idempotent.
+
+📄 05-kubernetes/03-workloads/cronjob.md
+# CronJob – Scheduled Jobs
+
+## What CronJob Does
+
+CronJob:
+> Runs Jobs on a schedule.
+
+---
+
+## Example Use Cases
+
+- Nightly backups
+- Cleanup tasks
+- Report generation
+
+---
+
+## Cron Format
+
+```text
+0 2 * * *
+
+
+Runs every day at 2 AM.
+
+Production Insight
+
+Monitor CronJobs.
+Silent failures are common.
+
+
+---
+
+## 📄 `05-kubernetes/03-workloads/workload-comparison.md`
+
+```md
+# Choosing the Right Workload Type
+
+| Workload | Use Case |
+|--------|---------|
+| Pod | Testing only |
+| Deployment | Stateless apps |
+| StatefulSet | Databases |
+| DaemonSet | Node-level agents |
+| Job | One-time tasks |
+| CronJob | Scheduled tasks |
+
+---
+
+## Golden Rule
+
+Stateless → Deployment  
+Stateful → StatefulSet
+
+📄 05-kubernetes/03-workloads/production-mindset.md
+# Kubernetes Workloads – Production Mindset
+
+Kubernetes is declarative.
+
+You tell Kubernetes:
+> “This is what I want.”
+
+Kubernetes figures out:
+> “How to make it happen.”
+
+---
+
+## Golden Rules
+
+- Never manage pods manually
+- Always define desired state
+- Design for failure
+- Monitor everything
+
+Workloads fail.
+Controllers recover.
+
+✅ WHERE WE ARE NOW
+
+You now deeply understand Kubernetes workloads:
+
+✔ Pod vs controllers
+✔ Deployment vs StatefulSet
+✔ DaemonSet logic
+✔ Jobs & CronJobs
+✔ Production patterns
+
+This is real production Kubernetes knowledge.
+
